@@ -15,6 +15,8 @@ namespace ShoppingCartCheckout.Services
             _cart = new Dictionary<char, int>();
         }
 
+        //Scanning the item which has been put in the basket.
+        //If it is a new product then the item count is set as 1 else the count will be added by 1
         public void ItemScan(char item)
         {
             try 
@@ -34,6 +36,8 @@ namespace ShoppingCartCheckout.Services
             }
         }
 
+        //Fetching the price of the item which has been put in the basket.
+        //If it is a new product which is not in the dictionary it will throw error.
         public int GetPrice()
         {
             int total = 0;
@@ -65,6 +69,8 @@ namespace ShoppingCartCheckout.Services
             }
         }
 
+        //Removing the item which has been put in the basket.
+        //If the count is 1 and remove item is called them the item will be directly removed from cart
         public void RemoveItem(char item)
         {
             if (_cart.ContainsKey(item))
@@ -81,6 +87,7 @@ namespace ShoppingCartCheckout.Services
             }
         }
 
+        //Clearing all the item which has been put in the basket.
         public void Clear()
         {
             _cart.Clear();

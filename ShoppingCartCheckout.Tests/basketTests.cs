@@ -13,6 +13,9 @@ namespace ShoppingCartCheckout.Tests
         [SetUp]
         public void Setup()
         {
+            // Item A are 50 each, but 3 of them will be costing 130.
+            // Item B are 30 each, but 2 of them will be costing 45.
+            // Item C and Item D are 20 and 15 respectively. No offers.
             _priceRules = new Dictionary<char, priceRules>
             {
                 { 'A', new priceRules { UnitPrice = 50, SpecialQuantity = 3, SpecialPrice = 130 } },
@@ -25,6 +28,7 @@ namespace ShoppingCartCheckout.Tests
         [Test]
         public void TestPricing_Threshold()
         {
+            // Adding an extra item than required for the deal to check if it works properly.
             var basket = new Basket(_priceRules);
             basket.ItemScan('A');
             basket.ItemScan('A');
@@ -42,6 +46,7 @@ namespace ShoppingCartCheckout.Tests
         [Test]
         public void TestPricing_Invalid()
         {
+            // Checking the system to see what if an unknown product comes to test.
             var basket = new Basket(_priceRules);
             basket.ItemScan('E'); // Invalid item
 
@@ -56,6 +61,7 @@ namespace ShoppingCartCheckout.Tests
         [Test]
         public void TestPricing_Remove()
         {
+            // Removing an item after scanning it to check whether price has been updated or not.
             var basket = new Basket(_priceRules);
             basket.ItemScan('A');
             basket.ItemScan('A');
@@ -73,6 +79,7 @@ namespace ShoppingCartCheckout.Tests
         [Test]
         public void TestPricing_Clear()
         {
+            // Clearing the entire basket to see what will be the price.
             var basket = new Basket(_priceRules);
             basket.ItemScan('A');
             basket.ItemScan('B');
